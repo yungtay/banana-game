@@ -1,4 +1,5 @@
 const alien = '../public/sprites/alien.png'
+const alien2 = '../public/sprites/alien2.png'
 import Fruits from './Fruits'
 export default class Player {
 
@@ -7,6 +8,7 @@ export default class Player {
     y: number;
     canvas: HTMLCanvasElement;
     image: HTMLImageElement;
+    lastKey: string;
 
     constructor(
         context: CanvasRenderingContext2D,
@@ -19,7 +21,7 @@ export default class Player {
     }
 
     draw() {
-        this.image.src = alien
+        this.image.src = this.lastKey === "ArrowLeft" ? alien2 : alien
         this.context.drawImage(this.image, this.x, this.y, 64, 97)
     }
 
@@ -31,6 +33,7 @@ export default class Player {
             } else {
                 this.x = this.canvas.width - 64
             }
+            this.lastKey = "ArrowRight"
         }
 
         if (event.key === "ArrowLeft") {
@@ -39,6 +42,7 @@ export default class Player {
             } else {
                 this.x = 0
             }
+            this.lastKey = "ArrowLeft"
         }
     }
 
